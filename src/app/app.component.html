@@ -1,43 +1,45 @@
+<app-header></app-header>
 <div class="container">
+
   <h1>{{title}}</h1>
-  <p>For more turorials and courses visit <a [href]="website" target="_blank"> samorgill.com</a></p>
 
   <div class="list-container">
+    <div class="form-container column-container">
+      <div class="form">
+        <h2>Add Songs</h2>
+
+        <mat-card>
+          <form [formGroup]="formGroup">
+            <span>Song name</span>
+            <input type="text" name="name" formControlName="name" placeholder="Ej: I'm a sheep" required>
+            <span>Duration</span>
+            <input type="text" name="name" formControlName="duration" placeholder="00:00" required>
+            <button [disabled]="!formGroup.valid" (click)="submitSong($event)">Save</button>
+          </form>
+        </mat-card>
+      </div>
+    </div>
 
     <div class="todo-container column-container">
-      <div class="list"
-           cdkDropList
-           #todoList="cdkDropList"
-           [cdkDropListData]="todos"
-           [cdkDropListConnectedTo]="[doneList]"
-           (cdkDropListDropped)="onDrop($event)">
-        <h2>Tech to learn</h2>
-        <mat-card *ngFor="let todo of todos" cdkDrag>
-          <mat-card-header>
-            <mat-card-title>{{todo.name}}</mat-card-title>
-            <mat-card-subtitle>{{todo.category}}</mat-card-subtitle>
+      <div class="list" cdkDropList #todoList="cdkDropList" [cdkDropListData]="songs"
+        [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="onDrop($event)">
+        <h2>Set</h2>
+        <mat-card *ngIf="songs.length === 0">
+          <mat-card-header *ngIf="songs.length === 0">
+            <mat-card-title>Add some songs here</mat-card-title>
+          </mat-card-header>
+        </mat-card>
+        <mat-card *ngFor="let song of songs" cdkDrag cdkDragBoundary=".todo-container">
+          <mat-card-header *ngIf="songs.length > 0">
+            <mat-card-title>{{song.name}}</mat-card-title>
+            <mat-card-subtitle>{{song.duration}}</mat-card-subtitle>
+            <button class="delete-song" (click)="deleteChosenSong($event)">Delete</button>
           </mat-card-header>
         </mat-card>
       </div>
-    </div>
-
-    <div class="done-container column-container">
-      <div class="list"
-           cdkDropList
-           #doneList="cdkDropList"
-           [cdkDropListData]="completed"
-           [cdkDropListConnectedTo]="todoList"
-           (cdkDropListDropped)="onDrop($event)">
-        <h2>Tech learned</h2>
-        <mat-card *ngFor="let complete of completed" cdkDrag>
-          <mat-card-header>
-            <mat-card-title>{{complete.name}}</mat-card-title>
-            <mat-card-subtitle>{{complete.category}}</mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
+      <div class="time-counter">
+        <span>Time left: {{timeToPlay}} mins</span>
       </div>
     </div>
-
   </div>
 </div>
-
