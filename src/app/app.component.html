@@ -14,7 +14,7 @@
             <span>Song name</span>
             <input type="text" name="name" formControlName="name" placeholder="Ej: I'm a sheep" required>
             <span>Duration</span>
-            <input type="text" name="name" formControlName="duration" placeholder="00:00" required>
+            <input type="text" name="name" formControlName="duration" placeholder="Ej: 01:37" [textMask]="{mask: mask}" required>
             <button [disabled]="!formGroup.valid" (click)="submitSong($event)">Save</button>
           </form>
         </mat-card>
@@ -55,7 +55,7 @@
       <span>Time left: {{timeToPlayString}} mins</span>
     </div>
     <div class="clear-setlist">
-      <button class="purge" (click)="deleteSet()" *ngIf="songs.length > 0">Delete set</button>
+      <button class="purge" (click)="openConfirmModal()" *ngIf="songs.length > 0">Delete set</button>
     </div>
   </div>
 </div>

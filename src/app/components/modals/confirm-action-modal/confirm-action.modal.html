@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirm action</h1>
+<div mat-dialog-content>
+  <p>Are you sure? This action cannot be undone</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="continue()" cdkFocusInitial>Do it</button>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+</div>

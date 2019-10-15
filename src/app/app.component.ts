@@ -1,6 +1,9 @@
 // Angular basic dependencies
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material';
+import { ConfirmActionModalComponent } from './components/modals/confirm-action-modal/confirm-action.modal';
+
 // Models
 import { Song } from '../models/song';
 // Form
@@ -13,13 +16,13 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class AppComponent {
 
+  title = 'Build your awesome setlist';
+
   public formGroup: FormGroup;
   public nameControl: AbstractControl;
   public durationControl: AbstractControl;
   public songData: Song;
-
-  title = 'Build your awesome setlist';
-
+  public mask = [/\d/, /\d/, ':', /\d/, /\d/];
   public songs = [];
 
   // Values used for time supervision in the template
@@ -34,8 +37,10 @@ export class AppComponent {
 
   public millisecs = (mins, secs) => ((mins * 60) + secs) * 1000;
 
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
+  ) {
     this.timeAlmostOut = false;
     this.notEnoughTime = false;
     this.timeToPlayString = '30';
@@ -51,9 +56,11 @@ export class AppComponent {
   }
 
   public initializeForm() {
+    const songTitlePattern: RegExp = /^[-!#$%&'*,.\/ \/ç:+0-9=?A-Z^_a-z]{2,40}$/;
+    const minsAndSecsPattern: RegExp = /^[0-5]\d:[0-5]\d$/;
     this.formGroup = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.maxLength(40)]],
-      duration: [null, Validators.required]
+      name: [null, [Validators.required, Validators.maxLength(40), Validators.pattern(songTitlePattern)]],
+      duration: [null, [Validators.required, Validators.maxLength(5), Validators.pattern(minsAndSecsPattern)]]
     });
     this.nameControl = this.formGroup.get('name');
     this.durationControl = this.formGroup.get('duration');
@@ -135,5 +142,20 @@ export class AppComponent {
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+  /**
+   * Opens a modal to ask for confirmation to delete specific actions.
+   */
+  openConfirmModal(): void {
+    const dialogRef = this.dialog.open(ConfirmActionModalComponent, {
+      width: '500px',
+      height: '200px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteSet();
+      }
+    });
   }
 }
