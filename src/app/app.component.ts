@@ -1,5 +1,5 @@
 // Angular basic dependencies
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 // Models
 import { Song } from '../models/song';
@@ -21,15 +21,33 @@ export class AppComponent {
   title = 'Build your awesome setlist';
 
   public songs = [];
-  // TODO: Establish an array for the song lengths
-  public timeToPlay: string;
+
+  // Values used for time supervision in the template
+  public timeAlmostOut: boolean;
+  public notEnoughTime: boolean;
+
+  // Values used for time measurement
+  public initialTime: any;
+  public initialTimeMls: number;
+  public timeToPlayString: string;
+  public timeLeft: any;
 
   public millisecs = (mins, secs) => ((mins * 60) + secs) * 1000;
 
 
   constructor(private formBuilder: FormBuilder) {
-    this.timeToPlay = '30';
+    this.timeAlmostOut = false;
+    this.notEnoughTime = false;
+    this.timeToPlayString = '30';
+    this.initialTime = this.timeToPlayString;
+    this.starterTimeToMls(this.timeToPlayString);
     this.initializeForm();
+  }
+
+  // Stores the assigned setlist time to Mls, for next operations
+  public starterTimeToMls(time) {
+    this.timeLeft = this.millisecs(Number(time), 0);
+    this.initialTimeMls = this.timeLeft;
   }
 
   public initializeForm() {
@@ -46,55 +64,67 @@ export class AppComponent {
     if (this.formGroup.valid) {
       const songInfo: Song = {
         name: this.nameControl.value,
-        duration: this.durationControl.value
+        duration: this.durationControl.value,
+        durationMls: this.millisecs(
+          Number(this.durationControl.value.split(':')[0]),
+          Number(this.durationControl.value.split(':')[1]))
       };
-      this.songs.push(songInfo);
-      this.adjustRemainingTime(this.durationControl.value);
+      if ((this.timeLeft - songInfo.durationMls) >= 0) {
+        /**
+         * Pushes the result onto the list as long as there was enough time left.
+         * Then, substracts the entry's time to the total time available to parse it as a string
+         */
+        this.songs.push(songInfo);
+        this.substractTime(this.timeLeft, songInfo.durationMls);
+      } else {
+        // Triggers the boolean that shows the alert for no time available.
+        // Prevents the entry from entering the list.
+        this.notEnoughTime = true;
+      }
       this.nameControl.setValue('');
       this.durationControl.setValue('');
       event.preventDefault();
     }
   }
 
-  public adjustRemainingTime(lastSongTime) {
 
-    const chosenSongMinsValue = Number(lastSongTime.split(':')[0]);
-    const chosenSongSecsValue = Number(lastSongTime.split(':')[1]);
-
-    const starterTimeMinsValue = Number(this.timeToPlay.split(':')[0]);
-  //  const starterTimeSecsValue = Number(this.timeToPlay.split(':')[1]);
-  /**
-   *  Uncomment line above if the initial time requires seconds.
-   * It will unlikely ever happen because bands almost always get their time to play
-   * in minutes, or hours and minutes
-   */
-
-    this.substractTime(starterTimeMinsValue, chosenSongMinsValue, chosenSongSecsValue);
-  }
-
-  public substractTime(starterMins, chosenMins, chosenSecs) {
-    const timeLeftMls = (this.millisecs(starterMins, 0) -
-    this.millisecs(chosenMins, chosenSecs));
+  // Substract the time of the last entrey from the original value
+  public substractTime(starterTime, songTime) {
+    const timeLeftMls = starterTime - songTime;
+    this.timeLeft = timeLeftMls;
+    this.timeAlmostOut = this.timeLeft <= 180000 ? true : false;
     this.msToTime(timeLeftMls);
   }
 
+  // Transforms Mls to a 'mm:ss' string to be displayed in the template
   public msToTime(duration) {
-
     const seconds = Math.floor((duration / 1000) % 60);
     const minutes = Math.floor((duration / (1000 * 60)) % 60);
-
     const finalminutes = (minutes < 10) ? '0' + minutes : minutes;
     const finalseconds = (seconds < 10) ? '0' + seconds : seconds;
 
-    this.timeToPlay = finalminutes + ':' + finalseconds;
+    this.timeToPlayString = finalminutes + ':' + finalseconds;
 }
 
   // Deletes the selected song from the list
   public deleteChosenSong(index) {
     this.songs.splice(index, 1);
+    if (this.songs.length > 0) {
+      const currentSetDuration = this.songs.reduce(( sum, { durationMls } ) => sum + durationMls , 0);
+      this.timeLeft = (this.initialTimeMls - currentSetDuration);
+      this.msToTime(this.timeLeft);
+    } else {
+      this.deleteSet();
+    }
+    this.timeAlmostOut = this.timeLeft <= 180000 ? true : false;
+    this.notEnoughTime = false;
   }
 
+  // Purges the entire setlist, resets initial timer
   public deleteSet() {
+    const resetTimer = this.millisecs(Number(this.initialTime), 0);
+    this.timeLeft = resetTimer;
+    this.msToTime(resetTimer);
     this.songs = [];
   }
 

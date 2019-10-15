@@ -9,6 +9,7 @@
         <h2>Add Songs</h2>
 
         <mat-card>
+          <!-- Form fields for the songs -->
           <form [formGroup]="formGroup">
             <span>Song name</span>
             <input type="text" name="name" formControlName="name" placeholder="Ej: I'm a sheep" required>
@@ -21,11 +22,12 @@
     </div>
 
     <div class="todo-container column-container">
+      <!-- Song list -->
       <div class="list" cdkDropList #todoList="cdkDropList" [cdkDropListData]="songs"
         [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="onDrop($event)">
         <h2>Set</h2>
         <mat-card *ngIf="songs.length === 0">
-          <mat-card-header *ngIf="songs.length === 0">
+          <mat-card-header>
             <mat-card-title>Add some songs here</mat-card-title>
           </mat-card-header>
         </mat-card>
@@ -37,9 +39,23 @@
           </mat-card-header>
         </mat-card>
       </div>
-      <div class="time-counter">
-        <span>Time left: {{timeToPlay}} mins</span>
+      <!-- Conditional divs for timer-related alerts -->
+      <div class="time-alert" *ngIf="timeAlmostOut || notEnoughTime">
+        <div class="almost-out" *ngIf="timeAlmostOut && !notEnoughTime">
+          <span class="alert">You are almost out of time!</span>
+        </div>
+        <div class="time-out" *ngIf="notEnoughTime">
+          <span class="alert">Woops!</span>
+          <br>
+          <span>You don't have enough time to add more songs. Try to rearrange the setlist or delete an item.</span>
       </div>
+    </div>
+          <!-- Counter that keeps track of the time remaining at every moment -->
+    <div class="time-counter" *ngIf="!notEnoughTime">
+      <span>Time left: {{timeToPlayString}} mins</span>
+    </div>
+    <div class="clear-setlist">
+      <button class="purge" (click)="deleteSet()" *ngIf="songs.length > 0">Delete set</button>
     </div>
   </div>
 </div>

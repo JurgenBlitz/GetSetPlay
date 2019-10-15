@@ -29,24 +29,13 @@ h2 {
   background-color: RGBA(255, 255, 255, 0.05);
 }
 
-.delete-song {
-  position: absolute;
-  bottom: 0.8rem;
-  right: 0.8rem;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.time-counter {
-  padding: 1em;
-}
-
-
-
-
 mat-card {
   margin: 1em;
   cursor: pointer;
+}
+
+.list > mat-card {
+  padding: 5px;
 }
 
 form {
@@ -84,6 +73,27 @@ input {
   cursor: move;
   background: white;
   font-size: 14px;
+}
+
+.delete-song {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.time-counter {
+  padding: 1em;
+}
+
+.time-alert {
+  padding: 0.2em 1em 0.5em 1em;
+}
+
+.alert {
+  color: red;
+  font-weight: 500;
 }
 
 .cdk-drag-preview {
