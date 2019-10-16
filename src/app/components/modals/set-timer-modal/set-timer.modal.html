@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1 mat-dialog-title>Welcome</h1>
+  <div mat-dialog-content>
+    <p>Please set the time for your setlist</p>
+    <span>Set the duration in minutes for better performance (1h30m equals 90 minutes)</span>
+    <br>
+    <div class="timer-input">
+      <mat-form-field>
+        <input matInput name="initialTime" formControlName="initialTime" [textMask]="{mask: mask}" placeholder="Ej: 65">
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="submit" [disabled]="!form.valid">Confirm</button>
+  </div>
+</form>

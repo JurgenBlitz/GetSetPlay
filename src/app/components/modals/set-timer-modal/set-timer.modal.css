@@ -1,0 +1,33 @@
+.mat-dialog-container {
+  padding: 10px 24px !important;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+span {
+  font-size: 0.9em !important;
+}
+
+.timer-input {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.mat-form-field {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+button {
+  background: linear-gradient(#5a7b5e, #53c481);
+  width: 8em;
+  color: white;
+  letter-spacing: 0.11em;
+  font-weight: bold;
+/*   text-shadow: 1px 0 0 rgb(2, 36, 5), -1px 0 0 rgb(2, 36, 5), 0 1px 0 rgb(2, 36, 5), 0 -1px 0 rgb(2, 36, 5), 1px 1px rgb(2, 36, 5), -1px -1px 0 rgb(2, 36, 5), 1px -1px 0 rgb(2, 36, 5), -1px 1px 0 rgb(2, 36, 5); */
+}

@@ -1,9 +1,9 @@
 // Angular basic dependencies
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
 import { ConfirmActionModalComponent } from './components/modals/confirm-action-modal/confirm-action.modal';
-
+import { SetTimerModalComponent } from './components/modals/set-timer-modal/set-timer.modal';
 // Models
 import { Song } from '../models/song';
 // Form
@@ -14,9 +14,12 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
 
-  title = 'Build your awesome setlist';
+export class AppComponent implements OnInit, OnChanges {
+
+  @Input() timeLeft: any;
+
+  public title = 'Build your awesome setlist';
 
   public formGroup: FormGroup;
   public nameControl: AbstractControl;
@@ -30,10 +33,9 @@ export class AppComponent {
   public notEnoughTime: boolean;
 
   // Values used for time measurement
-  public initialTime: any;
+  public initialTime: string;
   public initialTimeMls: number;
   public timeToPlayString: string;
-  public timeLeft: any;
 
   public millisecs = (mins, secs) => ((mins * 60) + secs) * 1000;
 
@@ -43,10 +45,37 @@ export class AppComponent {
   ) {
     this.timeAlmostOut = false;
     this.notEnoughTime = false;
-    this.timeToPlayString = '30';
-    this.initialTime = this.timeToPlayString;
-    this.starterTimeToMls(this.timeToPlayString);
     this.initializeForm();
+  }
+
+  ngOnInit() {
+    this.openSetTimerModal();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.timeAlmostOut = this.timeLeft <= 180000 ? true : false;
+    console.log(this.timeAlmostOut);
+  }
+
+  openSetTimerModal(): void {
+    const timerRef = this.dialog.open(SetTimerModalComponent,  {
+      width: '500px',
+      height: '300px',
+      autoFocus: true,
+      data: {time: this.initialTime},
+      position: {
+        top: '150px'
+      }
+    });
+    timerRef.afterClosed().subscribe(result => {
+      if (result.includes('_')) {
+        result.replace(/_/gi, '');
+      }
+      this.timeToPlayString = result.split(' ')[0];
+      this.initialTime = this.timeToPlayString;
+      this.starterTimeToMls(this.timeToPlayString);
+      this.initializeForm();
+    });
   }
 
   // Stores the assigned setlist time to Mls, for next operations
@@ -150,7 +179,10 @@ export class AppComponent {
   openConfirmModal(): void {
     const dialogRef = this.dialog.open(ConfirmActionModalComponent, {
       width: '500px',
-      height: '200px'
+      height: '200px',
+      position: {
+        top: '150px'
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -158,4 +190,5 @@ export class AppComponent {
       }
     });
   }
+
 }

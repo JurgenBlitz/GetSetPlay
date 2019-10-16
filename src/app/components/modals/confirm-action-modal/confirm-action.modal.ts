@@ -20,7 +20,6 @@ export class ConfirmActionModalComponent implements OnInit {
   continue() {
     const confirm = 'confirm';
     this.dialogRef.close(confirm);
-    console.log();
   }
 
   onNoClick(): void {

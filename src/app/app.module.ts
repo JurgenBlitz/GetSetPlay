@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material';
-// import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -12,14 +11,17 @@ import { AppComponent } from './app.component';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 // Modals
 import { ConfirmActionModalComponent } from './components/modals/confirm-action-modal/confirm-action.modal';
+import { SetTimerModalComponent } from './components/modals/set-timer-modal/set-timer.modal';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppHeaderComponent,
     ConfirmActionModalComponent,
+    SetTimerModalComponent
   ],
   imports: [
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -33,7 +35,7 @@ import { ConfirmActionModalComponent } from './components/modals/confirm-action-
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmActionModalComponent]
+  entryComponents: [ConfirmActionModalComponent, SetTimerModalComponent]
 })
 export class AppModule {
 }
