@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 export interface DialogData {
@@ -11,7 +11,7 @@ export interface DialogData {
   templateUrl: './confirm-action.modal.html',
   styleUrls: ['./confirm-action.modal.css'],
 })
-export class ConfirmActionModalComponent implements OnInit {
+export class ConfirmActionModalComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmActionModalComponent>,
@@ -24,9 +24,6 @@ export class ConfirmActionModalComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -44,7 +44,6 @@ export class SetTimerModalComponent implements OnInit {
   submit() {
     const chosenTime = this.timeControl.value;
     this.dialogRef.close(chosenTime);
-
   }
 
   onNoClick(): void {

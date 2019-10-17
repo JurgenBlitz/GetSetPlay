@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div mat-dialog-content>
+    <p>Choose a name for your setlist</p>
+  </div>
+  <div class="name-input">
+    <mat-form-field>
+      <input matInput name="setName" formControlName="setName">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="submit" cdkFocusInitial>Change</button>
+    <button mat-button class="deny" (click)="onNoClick()">Not now</button>
+  </div>
+</form>

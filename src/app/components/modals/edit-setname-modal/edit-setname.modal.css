@@ -1,3 +1,27 @@
+
+
+p {
+  margin-top: 0;
+}
+
+
+.name-input {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.mat-form-field {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input {
+  min-width: 220px;
+}
+
 button {
   background: linear-gradient(#5a7b5e, #53c481);
   width: 8em;
