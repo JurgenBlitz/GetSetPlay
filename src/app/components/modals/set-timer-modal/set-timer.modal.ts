@@ -1,11 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-
-export interface DialogData {
-  time: string;
-}
 
 @Component({
   // tslint:disable-next-line
@@ -27,7 +23,6 @@ export class SetTimerModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SetTimerModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private formBuilder: FormBuilder
   ) {
     dialogRef.disableClose = true;

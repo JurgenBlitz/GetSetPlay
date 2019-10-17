@@ -25,16 +25,36 @@ h2 {
 .column-container {
   width: 300px;
   max-width: 100%;
-  margin-left: 25px;
+  margin-left: 50px;
   margin-bottom: 25px;
   display: inline-block;
   vertical-align: top;
   background-color: RGBA(255, 255, 255, 0.05);
 }
 
+.todo-container.column-container {
+  width: 500px;
+}
+
 mat-card {
   margin: 1em;
   cursor: pointer;
+  text-align: initial;
+}
+
+mat-card-title {
+  flex: 1 1 auto; /* make this grow and shrink */
+  min-width: 0; /* see link to see why this is needed */
+  margin-right: 16px;
+  display: grid;
+}
+
+mat-card-title > h3 {
+  font-size: 1em;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .list > mat-card {
@@ -42,7 +62,7 @@ mat-card {
 }
 
 .setlist-name > h2 {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 .setlist-name {

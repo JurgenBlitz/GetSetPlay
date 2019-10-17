@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pdf-creator',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PdfCreatorComponent implements OnInit {
 
-  constructor() { }
+  text: any;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.text = JSON.parse(params['data']);
+    });
+    this.checkreturn();
   }
-
+ checkreturn() {
+  console.log(this.text);
+ }
 }

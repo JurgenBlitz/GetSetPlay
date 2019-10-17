@@ -1,5 +1,6 @@
 // Angular basic dependencies
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 // Drag and Drop
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 // Modals
@@ -45,6 +46,7 @@ export class MainCompComponent implements OnInit, OnChanges {
   public millisecs = (mins, secs) => ((mins * 60) + secs) * 1000;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
   ) {
@@ -190,6 +192,15 @@ export class MainCompComponent implements OnInit, OnChanges {
     this.timeLeft = resetTimer;
     this.msToTime(resetTimer);
     this.songs = [];
+  }
+
+  exportPdf() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+          'data': JSON.stringify('vamos a hacer una prueba')
+      }
+    };
+    this.router.navigate(['exportpdf'], navigationExtras);
   }
 
   // Handles the repositioning of items in the columns
