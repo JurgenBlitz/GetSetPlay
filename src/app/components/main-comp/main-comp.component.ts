@@ -1,6 +1,6 @@
 // Angular basic dependencies
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 // Drag and Drop
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 // Modals
@@ -10,6 +10,10 @@ import { SetTimerModalComponent } from '../modals/set-timer-modal/set-timer.moda
 import { EditSetnameModalComponent } from '../modals/edit-setname-modal/edit-setname.modal';
 // Models
 import { Song } from '../../../models/song';
+import { Setlist } from '../../../models/setlist';
+// Service/s
+import { PassdataService } from '../../../services/passdata.service';
+import { TimeService } from '../../../services/time.service';
 // Form
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -47,6 +51,8 @@ export class MainCompComponent implements OnInit, OnChanges {
 
   constructor(
     private router: Router,
+    public passdataService: PassdataService,
+    public timeService: TimeService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
   ) {
@@ -71,24 +77,32 @@ export class MainCompComponent implements OnInit, OnChanges {
    * The input has to be filled in to close it.
    */
   openSetTimerModal(): void {
-    const timerRef = this.dialog.open(SetTimerModalComponent,  {
-      width: '500px',
-      height: '300px',
-      autoFocus: true,
-      data: {time: this.initialTime},
-      position: {
-        top: '150px'
-      }
-    });
-    timerRef.afterClosed().subscribe(result => {
-      if (result.includes('_')) {
-        result.replace(/_/gi, '');
-      }
-      this.timeToPlayString = result.split(' ')[0];
-      this.initialTime = this.timeToPlayString;
+    const previousData = this.passdataService.finishedSetlist;
+    if (!previousData) {
+      const timerRef = this.dialog.open(SetTimerModalComponent,  {
+        width: '500px',
+        height: '300px',
+        autoFocus: true,
+        data: {time: this.initialTime},
+        position: {
+          top: '150px'
+        }
+      });
+      timerRef.afterClosed().subscribe(result => {
+        if (result.includes('_')) {
+          result.replace(/_/gi, '');
+        }
+        this.timeToPlayString = result.split(' ')[0];
+        this.initialTime = this.timeToPlayString;
+        this.starterTimeToMls(this.timeToPlayString);
+        this.initializeForm();
+      });
+    } else {
+      this.timeToPlayString = previousData.setName;
+      this.initialTime = previousData.time;
       this.starterTimeToMls(this.timeToPlayString);
       this.initializeForm();
-    });
+    }
   }
 
   // Stores the assigned setlist time to Mls, for next operations
@@ -194,13 +208,18 @@ export class MainCompComponent implements OnInit, OnChanges {
     this.songs = [];
   }
 
-  exportPdf() {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-          'data': JSON.stringify('vamos a hacer una prueba')
-      }
+  /**
+   * Creates an object to send to the service, and redirects
+   * to the view of the finished set
+   */
+  redirectToSetViewer() {
+    const data: Setlist = {
+      setName: this.setListName,
+      songs: [...this.songs],
+      time: this.initialTime
     };
-    this.router.navigate(['exportpdf'], navigationExtras);
+    this.passdataService.storeList(data);
+    this.router.navigate(['exportpdf']);
   }
 
   // Handles the repositioning of items in the columns

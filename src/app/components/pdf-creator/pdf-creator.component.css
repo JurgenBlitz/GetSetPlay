@@ -1,3 +1,12 @@
 .container {
   margin: 50px;
 }
+
+.finished-setlist {
+  background: #eaeaea;
+  color: #000;
+  padding: 35px;
+  margin-top: 20px;
+  height: 600px;
+  border-radius: 3px;
+}

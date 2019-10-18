@@ -62,7 +62,7 @@
     <!-- Button to clear the list and reset the timer. Will display a modal -->
     <div class="clear-setlist" *ngIf="songs.length > 0">
       <button class="purge" (click)="openConfirmModal()">Delete set</button>
-      <button class="purge" (click)="exportPdf()">Finish</button>
+      <button class="purge" (click)="redirectToSetViewer()">Finish</button>
     </div>
   </div>
 </div>
