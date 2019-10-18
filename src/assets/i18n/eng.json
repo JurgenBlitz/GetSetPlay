@@ -1,6 +1,41 @@
 {
-  "timermodal.welcome": "Welcome",
-  "timermodal.timeinput": "Please set the time for your setlist",
-  "maincomponent.claim": "Build your awesome sentlist"
+  "common": {
+    "songname": "Song name",
+    "duration": "Duration",
+    "mins": "mins",
+    "confirm": "Confirm",
+    "not_now": "Not now",
+    "save": "Save",
+    "delete": "Delete",
+    "finish": "Finish"
+  },
+  "action": {
+    "title": "Confirm action",
+    "confirm": "Are you sure? This action cannot be undone",
+    "do_it": "Do it",
+    "no_thanks": "No thanks",
+    "made_by": "A setlist created with GetSetPlay"
+  },
+  "setlist_changename": {
+    "choose": "Choose a name for your setlist",
+    "change": "Change",
+    "not_now": "Not now"
+  },
+  "timermodal": {
+    "welcome": "Welcome",
+    "timeinput": "Please set the time for your setlist",
+    "instructions": "Set the duration in minutes for better performance (1h30m equals 90 minutes)"
+  },
+  "maincomponent": {
+    "claim": "Build your awesome setlist",
+    "addsong": "Add Songs",
+    "myset": "My setlist",
+    "add": "Add some songs here",
+    "timealmostout": "You are almost out of time!",
+    "woops": "Woops!",
+    "notimeleft": "You don't have enough time to add more songs. Try to rearrange the setlist or delete an item.",
+    "timeremaining": "Time left",
+    "delete_set": "Delete set"
+  }
 }
 

@@ -27,8 +27,6 @@ export class MainCompComponent implements OnInit, OnChanges {
 
   @Input() timeLeft: any;
 
-  public title = 'Build your awesome setlist';
-
   public formGroup: FormGroup;
   public nameControl: AbstractControl;
   public durationControl: AbstractControl;
@@ -43,6 +41,7 @@ export class MainCompComponent implements OnInit, OnChanges {
   // Values used for time measurement
   public initialTime: string;
   public initialTimeMls: number;
+
   // String variables
   public timeToPlayString: string;
   public setListName: string;
@@ -166,7 +165,6 @@ export class MainCompComponent implements OnInit, OnChanges {
       event.preventDefault();
     }
   }
-
 
   // Substract the time of the last entrey from the original value
   public substractTime(starterTime, songTime) {
