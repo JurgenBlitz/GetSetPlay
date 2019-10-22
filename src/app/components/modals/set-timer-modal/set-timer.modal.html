@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <h1 mat-dialog-title>Welcome</h1>
+  <h1 mat-dialog-title>{{ 'timermodal.welcome' | translate }}</h1>
   <div mat-dialog-content>
-    <p>Please set the time for your setlist</p>
-    <span>Set the duration in minutes for better performance (1h30m equals 90 minutes)</span>
+    <p>{{ 'timermodal.timeinput' | translate }}</p>
+    <span>{{ 'timermodal.instructions' | translate }}</span>
     <br>
     <div class="timer-input">
       <mat-form-field>
@@ -11,6 +11,6 @@
     </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button type="submit" [disabled]="!form.valid">Confirm</button>
+    <button mat-button type="submit" [disabled]="!form.valid">{{ 'common.confirm' | translate }}</button>
   </div>
 </form>

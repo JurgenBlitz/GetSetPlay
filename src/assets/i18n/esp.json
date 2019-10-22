@@ -1,0 +1,41 @@
+{
+  "common": {
+    "songname": "Nombre",
+    "duration": "Duración",
+    "mins": "minutos",
+    "confirm": "Confirmar",
+    "not_now": "Ahora no",
+    "save": "Guardar",
+    "delete": "Borrar",
+    "finish": "Terminar"
+  },
+  "action": {
+    "title": "Confirmar acción",
+    "confirm": "¿Estás seguro? Esta acción no puede deshacerse",
+    "do_it": "Hazlo",
+    "no_thanks": "No, gracias",
+    "made_by": "Un set de directo creado con GetSetPlay"
+  },
+  "setlist_changename": {
+    "choose": "Elige un nombre para tu set",
+    "change": "Cambiar",
+    "not_now": "Ahora no"
+  },
+  "timermodal": {
+    "welcome": "Bienvenido",
+    "timeinput": "Por favor, introduce un tiempo para tu set",
+    "instructions": "Pon la duración en minutos para mejorar el rendimiento de la app (1h30m son 90 minutos)"
+  },
+  "maincomponent": {
+    "claim": "Crea un setlist genial",
+    "addsong": "Añade canciones",
+    "myset": "Mi setlist",
+    "add": "Pon algunos temas aquí",
+    "timealmostout": "¡Te estás quedando sin tiempo!",
+    "woops": "¡Vaya!",
+    "notimeleft": "No te queda tiempo para añadir más temas. Intenta reordenar el set, o borra algún elemento.",
+    "timeremaining": "Tiempo restante",
+    "delete_set": "Borrar set"
+  }
+}
+

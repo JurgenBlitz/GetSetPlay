@@ -1,13 +1,7 @@
 // Angular basic dependencies
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatDialog } from '@angular/material';
-import { ConfirmActionModalComponent } from './components/modals/confirm-action-modal/confirm-action.modal';
-import { SetTimerModalComponent } from './components/modals/set-timer-modal/set-timer.modal';
-// Models
-import { Song } from '../models/song';
-// Form
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,180 +9,20 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, OnChanges {
-
-  @Input() timeLeft: any;
-
-  public title = 'Build your awesome setlist';
-
-  public formGroup: FormGroup;
-  public nameControl: AbstractControl;
-  public durationControl: AbstractControl;
-  public songData: Song;
-  public mask = [/\d/, /\d/, ':', /\d/, /\d/];
-  public songs = [];
-
-  // Values used for time supervision in the template
-  public timeAlmostOut: boolean;
-  public notEnoughTime: boolean;
-
-  // Values used for time measurement
-  public initialTime: string;
-  public initialTimeMls: number;
-  public timeToPlayString: string;
-
-  public millisecs = (mins, secs) => ((mins * 60) + secs) * 1000;
-
+export class AppComponent implements OnInit {
+  public activeLang = 'eng';
   constructor(
-    private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    private translate: TranslateService,
+    private router: Router
   ) {
-    this.timeAlmostOut = false;
-    this.notEnoughTime = false;
-    this.initializeForm();
+    this.translate.setDefaultLang(this.activeLang);
   }
 
   ngOnInit() {
-    this.openSetTimerModal();
+    this.router.navigate(['']);
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.timeAlmostOut = this.timeLeft <= 180000 ? true : false;
-    console.log(this.timeAlmostOut);
+  public cambiarLenguaje(lang) {
+    this.activeLang = lang;
+    this.translate.use(lang);
   }
-
-  openSetTimerModal(): void {
-    const timerRef = this.dialog.open(SetTimerModalComponent,  {
-      width: '500px',
-      height: '300px',
-      autoFocus: true,
-      data: {time: this.initialTime},
-      position: {
-        top: '150px'
-      }
-    });
-    timerRef.afterClosed().subscribe(result => {
-      if (result.includes('_')) {
-        result.replace(/_/gi, '');
-      }
-      this.timeToPlayString = result.split(' ')[0];
-      this.initialTime = this.timeToPlayString;
-      this.starterTimeToMls(this.timeToPlayString);
-      this.initializeForm();
-    });
-  }
-
-  // Stores the assigned setlist time to Mls, for next operations
-  public starterTimeToMls(time) {
-    this.timeLeft = this.millisecs(Number(time), 0);
-    this.initialTimeMls = this.timeLeft;
-  }
-
-  public initializeForm() {
-    const songTitlePattern: RegExp = /^[-!#$%&'*,.\/ \/ç:+0-9=?A-Z^_a-z]{2,40}$/;
-    const minsAndSecsPattern: RegExp = /^[0-5]\d:[0-5]\d$/;
-    this.formGroup = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.maxLength(40), Validators.pattern(songTitlePattern)]],
-      duration: [null, [Validators.required, Validators.maxLength(5), Validators.pattern(minsAndSecsPattern)]]
-    });
-    this.nameControl = this.formGroup.get('name');
-    this.durationControl = this.formGroup.get('duration');
-  }
-
-  // Submits an entry. Clears inputs right away to re-use
-  public submitSong(event) {
-    if (this.formGroup.valid) {
-      const songInfo: Song = {
-        name: this.nameControl.value,
-        duration: this.durationControl.value,
-        durationMls: this.millisecs(
-          Number(this.durationControl.value.split(':')[0]),
-          Number(this.durationControl.value.split(':')[1]))
-      };
-      if ((this.timeLeft - songInfo.durationMls) >= 0) {
-        /**
-         * Pushes the result onto the list as long as there was enough time left.
-         * Then, substracts the entry's time to the total time available to parse it as a string
-         */
-        this.songs.push(songInfo);
-        this.substractTime(this.timeLeft, songInfo.durationMls);
-      } else {
-        // Triggers the boolean that shows the alert for no time available.
-        // Prevents the entry from entering the list.
-        this.notEnoughTime = true;
-      }
-      this.nameControl.setValue('');
-      this.durationControl.setValue('');
-      event.preventDefault();
-    }
-  }
-
-
-  // Substract the time of the last entrey from the original value
-  public substractTime(starterTime, songTime) {
-    const timeLeftMls = starterTime - songTime;
-    this.timeLeft = timeLeftMls;
-    this.timeAlmostOut = this.timeLeft <= 180000 ? true : false;
-    this.msToTime(timeLeftMls);
-  }
-
-  // Transforms Mls to a 'mm:ss' string to be displayed in the template
-  public msToTime(duration) {
-    const seconds = Math.floor((duration / 1000) % 60);
-    const minutes = Math.floor((duration / (1000 * 60)) % 60);
-    const finalminutes = (minutes < 10) ? '0' + minutes : minutes;
-    const finalseconds = (seconds < 10) ? '0' + seconds : seconds;
-
-    this.timeToPlayString = finalminutes + ':' + finalseconds;
-}
-
-  // Deletes the selected song from the list
-  public deleteChosenSong(index) {
-    this.songs.splice(index, 1);
-    if (this.songs.length > 0) {
-      const currentSetDuration = this.songs.reduce(( sum, { durationMls } ) => sum + durationMls , 0);
-      this.timeLeft = (this.initialTimeMls - currentSetDuration);
-      this.msToTime(this.timeLeft);
-    } else {
-      this.deleteSet();
-    }
-    this.timeAlmostOut = this.timeLeft <= 180000 ? true : false;
-    this.notEnoughTime = false;
-  }
-
-  // Purges the entire setlist, resets initial timer
-  public deleteSet() {
-    const resetTimer = this.millisecs(Number(this.initialTime), 0);
-    this.timeLeft = resetTimer;
-    this.msToTime(resetTimer);
-    this.songs = [];
-  }
-
-  // Handles the repositioning of items in the columns
-  onDrop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-  }
-
-  /**
-   * Opens a modal to ask for confirmation to delete specific actions.
-   */
-  openConfirmModal(): void {
-    const dialogRef = this.dialog.open(ConfirmActionModalComponent, {
-      width: '500px',
-      height: '200px',
-      position: {
-        top: '150px'
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.deleteSet();
-      }
-    });
-  }
-
 }

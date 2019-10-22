@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+// Service/s
+import { PassdataService } from '../../../services/passdata.service';
 
 @Component({
   selector: 'app-pdf-creator',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PdfCreatorComponent implements OnInit {
 
-  constructor() { }
+  text: any;
+  fullsonglist: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private passDataService: PassdataService
+  ) { }
 
   ngOnInit() {
-  }
-
+  this.fullsonglist = this.passDataService.finishedSetlist;
+ }
 }

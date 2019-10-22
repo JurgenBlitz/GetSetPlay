@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Confirm action</h1>
+<h1 mat-dialog-title>{{'action.title' | translate}}</h1>
 <div mat-dialog-content>
-  <p>Are you sure? This action cannot be undone</p>
+  <p>{{'action.confirm' | translate}}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="continue()" cdkFocusInitial>Do it</button>
-  <button mat-button class="deny" (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="continue()" cdkFocusInitial>{{'action.do_it' | translate}}</button>
+  <button mat-button class="deny" (click)="onNoClick()">{{'action.no_thanks' | translate}}</button>
 </div>

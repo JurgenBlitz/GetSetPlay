@@ -1,3 +1,7 @@
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 button {
   background: linear-gradient(#5a7b5e, #53c481);
   width: 8em;

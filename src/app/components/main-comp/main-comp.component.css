@@ -1,0 +1,191 @@
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.translate {
+  max-height: 30px;
+  position: absolute;
+  top: 2.5em;
+  right: 20px;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.list-container {
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 2em;
+
+}
+
+.list {
+  text-align: center;
+}
+
+.column-container {
+  width: 300px;
+  max-width: 100%;
+  margin-left: 50px;
+  margin-bottom: 25px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: RGBA(255, 255, 255, 0.05);
+}
+
+.todo-container.column-container {
+  width: 500px;
+}
+
+mat-card {
+  margin: 1em;
+  cursor: pointer;
+  text-align: initial;
+}
+
+mat-card-title {
+  flex: 1 1 auto;
+  /* make this grow and shrink */
+  min-width: 0;
+  /* see link to see why this is needed */
+  margin-right: 16px;
+  display: grid;
+}
+
+mat-card-title>h3 {
+  font-size: 1em;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.list>mat-card {
+  padding: 5px;
+}
+
+.setlist-name>h2 {
+  margin-bottom: 0;
+}
+
+.setlist-name {
+  display: inline-flex;
+}
+
+.setlist-name>button {
+  background: transparent;
+  border: none;
+  height: fit-content;
+  margin: 1.7em 0 0 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+form>span {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+input {
+  padding: 5px;
+  margin: 10px 10px 15px 10px;
+  border-radius: 5px;
+  background: inherit;
+  color: white;
+}
+
+.form-container button {
+  padding: 5px 10px;
+  margin: 10px 50px;
+  border-radius: 5px;
+}
+
+.list {
+  border-radius: 2px;
+}
+
+.list-item {
+  margin: 10px;
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.delete-song {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.purge {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 1em;
+}
+
+.time-counter {
+  padding: 1em;
+}
+
+.time-alert {
+  padding: 0.2em 1em 0.5em 1em;
+}
+
+.alert {
+  color: red;
+  font-weight: 500;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+a {
+  text-decoration: none;
+  color: dodgerblue;
+}
