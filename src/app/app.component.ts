@@ -21,8 +21,4 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.navigate(['']);
   }
-  public cambiarLenguaje(lang) {
-    this.activeLang = lang;
-    this.translate.use(lang);
-  }
 }

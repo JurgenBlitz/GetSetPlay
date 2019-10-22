@@ -1,0 +1,6 @@
+.language-selector {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  font-weight: 500;
+}

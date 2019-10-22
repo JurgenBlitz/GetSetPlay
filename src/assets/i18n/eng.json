@@ -26,6 +26,11 @@
     "timeinput": "Please set the time for your setlist",
     "instructions": "Set the duration in minutes for better performance (1h30m equals 90 minutes)"
   },
+  "translate": {
+    "title": "Language",
+    "english": "English",
+    "spanish": "Spanish"
+  },
   "maincomponent": {
     "claim": "Build your awesome setlist",
     "addsong": "Add Songs",

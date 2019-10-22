@@ -26,6 +26,11 @@
     "timeinput": "Por favor, introduce un tiempo para tu set",
     "instructions": "Pon la duración en minutos para mejorar el rendimiento de la app (1h30m son 90 minutos)"
   },
+  "translate": {
+    "title": "Idiomas",
+    "english": "Inglés",
+    "spanish": "Español"
+  },
   "maincomponent": {
     "claim": "Crea un setlist genial",
     "addsong": "Añade canciones",
