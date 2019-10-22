@@ -10,6 +10,13 @@
   margin-top: 50px;
 }
 
+.translate {
+  max-height: 30px;
+  position: absolute;
+  top: 2.5em;
+  right: 20px;
+}
+
 h2 {
   display: flex;
   justify-content: center;
@@ -22,6 +29,7 @@ h2 {
   margin-top: 2em;
 
 }
+
 .list {
   text-align: center;
 }
@@ -47,13 +55,15 @@ mat-card {
 }
 
 mat-card-title {
-  flex: 1 1 auto; /* make this grow and shrink */
-  min-width: 0; /* see link to see why this is needed */
+  flex: 1 1 auto;
+  /* make this grow and shrink */
+  min-width: 0;
+  /* see link to see why this is needed */
   margin-right: 16px;
   display: grid;
 }
 
-mat-card-title > h3 {
+mat-card-title>h3 {
   font-size: 1em;
   margin: 0;
   overflow: hidden;
@@ -61,11 +71,11 @@ mat-card-title > h3 {
   text-overflow: ellipsis;
 }
 
-.list > mat-card {
+.list>mat-card {
   padding: 5px;
 }
 
-.setlist-name > h2 {
+.setlist-name>h2 {
   margin-bottom: 0;
 }
 
@@ -73,7 +83,7 @@ mat-card-title > h3 {
   display: inline-flex;
 }
 
-.setlist-name > button {
+.setlist-name>button {
   background: transparent;
   border: none;
   height: fit-content;
@@ -86,7 +96,7 @@ form {
   justify-content: space-between;
 }
 
-form > span {
+form>span {
   margin-left: 10px;
   font-weight: bold;
 }
@@ -155,8 +165,8 @@ input {
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-  0 8px 10px 1px rgba(0, 0, 0, 0.14),
-  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {

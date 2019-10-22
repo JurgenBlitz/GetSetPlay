@@ -1,12 +1,15 @@
 <div class="container">
+  <div class="translate">
+    <app-translate></app-translate>
+  </div>
   <h1>{{ 'maincomponent.claim' | translate}}</h1>
   <div class="list-container">
     <div class="form-container column-container">
       <div class="form">
         <h2>{{'maincomponent.addsong' | translate}}</h2>
 
+        <!-- Form fields for the songs -->
         <mat-card>
-          <!-- Form fields for the songs -->
           <form [formGroup]="formGroup">
             <span>{{'common.songname' | translate}}</span>
             <input type="text" name="name" formControlName="name" placeholder="Ej: I'm a sheep" required>
@@ -18,8 +21,8 @@
       </div>
     </div>
 
+    <!-- Song list -->
     <div class="todo-container column-container">
-      <!-- Song list -->
       <div class="list" cdkDropList #todoList="cdkDropList" [cdkDropListData]="songs"
         [cdkDropListConnectedTo]="[doneList]" (cdkDropListDropped)="onDrop($event)">
         <div class="setlist-name">
@@ -50,16 +53,16 @@
           <span class="alert">{{'maincomponent.woops' | translate}}</span>
           <br>
           <span>{{'maincomponent.notimeleft' | translate}}</span>
+        </div>
+      </div>
+      <!-- Counter that keeps track of the time remaining at every moment -->
+      <div class="time-counter" *ngIf="!notEnoughTime">
+        <span>{{'maincomponent.timeremaining' | translate}}: {{timeToPlayString}} mins</span>
+      </div>
+      <!-- Buttons to clear the list and reset the timer, and to finish the setlist -->
+      <div class="clear-setlist" *ngIf="songs.length > 0">
+        <button class="purge" (click)="openConfirmModal()">{{'maincomponent.delete_set' | translate}}</button>
+        <button class="purge" (click)="redirectToSetViewer()">{{'common.finish' | translate}}</button>
       </div>
     </div>
-    <!-- Counter that keeps track of the time remaining at every moment -->
-    <div class="time-counter" *ngIf="!notEnoughTime">
-      <span>{{'maincomponent.timeremaining' | translate}}: {{timeToPlayString}} mins</span>
-    </div>
-    <!-- Button to clear the list and reset the timer. Will display a modal -->
-    <div class="clear-setlist" *ngIf="songs.length > 0">
-      <button class="purge" (click)="openConfirmModal()">{{'maincomponent.delete_set' | translate}}</button>
-      <button class="purge" (click)="redirectToSetViewer()">{{'common.finish' | translate}}</button>
-    </div>
   </div>
-</div>
