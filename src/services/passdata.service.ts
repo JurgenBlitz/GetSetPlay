@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Setlist } from '../models/setlist';
 
 @Injectable({
@@ -7,9 +7,12 @@ import { Setlist } from '../models/setlist';
 
 export class PassdataService {
 
+  @Output() languageChange: EventEmitter<any> = new EventEmitter;
+
   public finishedSetlist: Setlist;
   public edited: boolean;
   public data: any;
+
   constructor() {
     this.edited = false;
   }
@@ -17,6 +20,10 @@ export class PassdataService {
   public storeList(data) {
     this.edited = true;
     this.finishedSetlist = data;
+  }
+
+  public sendLanguageSelection(lang) {
+    this.languageChange.emit(lang);
   }
 
 }

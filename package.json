@@ -1,9 +1,9 @@
 {
-  "name": "dragdrop",
-  "version": "0.0.0",
+  "name": "getsetplay",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

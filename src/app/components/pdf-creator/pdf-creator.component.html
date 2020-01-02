@@ -1,29 +1,24 @@
 <div class="container">
   <div class="goback-button">
-    <button  routerLink="/">Go back</button>
+    <button  routerLink="/">{{'common.back' | translate }}</button>
   </div>
   <div class="translate">
     <app-translate></app-translate>
   </div>
   <div class="finished setlist">
     <div class="title">
-      <h2>My Title</h2>
+      <h2>{{setName}}</h2>
     </div>
-    <div class="songlist">
-      <!-- *ngFor="let song of fullsonglist" -->
+    <div class="songlist" *ngFor="let song of fullsonglist">
       <ul>
         <li>
-          <h3>Song title</h3>
-          <p>00:00</p>
-        </li>
-        <li>
-          <h3>Another song</h3>
-          <p>00:00</p>
+          <h3>{{song.name}}</h3>
+          <p>{{song.duration}}</p>
         </li>
       </ul>
     </div>
     <div class="time-available">
-      45 mins
+      {{setTime}} mins
     </div>
     <span>A setlist created with GetSetPlay</span>
   </div>

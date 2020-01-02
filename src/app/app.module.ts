@@ -23,7 +23,7 @@ import { SetlistPdfComponent } from './components/setlist-pdf/setlist-pdf.compon
 import { ConfirmActionModalComponent } from './components/modals/confirm-action-modal/confirm-action.modal';
 import { SetTimerModalComponent } from './components/modals/set-timer-modal/set-timer.modal';
 import { EditSetnameModalComponent } from './components/modals/edit-setname-modal/edit-setname.modal';
-import { TranslateComponent } from './components/translate/translate.component';
+import { TranslateComponent } from './components/shared/translate/translate.component';
 
 
 

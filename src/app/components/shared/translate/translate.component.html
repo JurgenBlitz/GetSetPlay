@@ -1,6 +1,7 @@
 <div class="language-selector">
-  <select placeholder="{{'translate.title' | translate}} &#9660;">
-    <option name="english" (click)="changeLanguage('eng')">{{'translate.english' | translate}}</option>
-    <option name="spanish" (click)="changeLanguage('esp')">{{'translate.spanish' | translate}}</option>
+  <select (change)="changeLanguage($event.target.value)">
+    <option value="" disabled selected hidden>{{'translate.title' | translate}}</option>
+    <option name="english" value="eng">{{'translate.english' | translate}}</option>
+    <option name="spanish" value="esp">{{'translate.spanish' | translate}}</option>
   </select>
 </div>

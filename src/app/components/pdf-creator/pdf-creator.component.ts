@@ -10,7 +10,8 @@ import { PassdataService } from '../../../services/passdata.service';
 })
 export class PdfCreatorComponent implements OnInit {
 
-  text: any;
+  setName: any;
+  setTime: any;
   fullsonglist: any;
 
   constructor(
@@ -19,6 +20,9 @@ export class PdfCreatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.fullsonglist = this.passDataService.finishedSetlist;
+  this.fullsonglist = this.passDataService.finishedSetlist.songs;
+  this.setName = this.passDataService.finishedSetlist.setName;
+  this.setTime = this.passDataService.finishedSetlist.time;
+  console.log(this.fullsonglist);
  }
 }
