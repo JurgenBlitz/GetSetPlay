@@ -9,7 +9,7 @@
 
 ## Instalación
 - Lanza el comando `npm install` o `npm i` para instalar las dependencias necesarias.
-- Lanza `ng serve` para iniciar el proyecto en entorno de desarrollo. 
+- Lanza `npm run start` para iniciar el proyecto en entorno de desarrollo. 
 - Visita `http://localhost:4200/` para ver y utilizar la app.
 
 ## Concepto
@@ -32,7 +32,7 @@ Los servicios que usa la app devuelven, en su mayoría, valores internos que man
 
 ## Installation
 - `npm install` or `npm i` to install all required dependencies.
-- `ng serve` to launch the project locally.
+- `npm run start` to launch the project locally.
 - Visit `http://localhost:4200/` to see and use the app.
 
 ## Concept

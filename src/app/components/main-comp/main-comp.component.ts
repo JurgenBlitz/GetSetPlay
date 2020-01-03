@@ -111,7 +111,7 @@ export class MainCompComponent implements OnInit, OnChanges {
   }
 
   public initializeForm() {
-    const songTitlePattern: RegExp = /^[-!#$%&'*,.\/ \/ç:+0-9=?A-Z^_a-z]{2,40}$/;
+    const songTitlePattern: RegExp = /^[-!#$%&'*,.\/ \/ç:+0-9=?ñA-Z^_a-z]{2,40}$/;
     const minsAndSecsPattern: RegExp = /^[0-5]\d:[0-5]\d$/;
     this.formGroup = this.formBuilder.group({
       name: [null, [Validators.required, Validators.maxLength(40), Validators.pattern(songTitlePattern)]],
@@ -228,7 +228,6 @@ export class MainCompComponent implements OnInit, OnChanges {
         event.currentIndex);
     }
   }
-
 
   // Opens a modal to ask for confirmation to delete specific actions.
   openConfirmModal(): void {

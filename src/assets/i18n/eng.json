@@ -15,6 +15,8 @@
     "confirm": "Are you sure? This action cannot be undone",
     "do_it": "Do it",
     "no_thanks": "No thanks",
+    "hidetimes": "Hide song times",
+    "showtimes": "Show song times",
     "made_by": "A setlist created with GetSetPlay"
   },
   "setlist_changename": {

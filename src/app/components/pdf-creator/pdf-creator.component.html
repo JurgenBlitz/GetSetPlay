@@ -1,25 +1,24 @@
 <div class="container">
-  <div class="goback-button">
-    <button  routerLink="/">{{'common.back' | translate }}</button>
+  <div class="toolbar">
+    <button routerLink="/">{{'common.back' | translate }}</button>
+    <button (click)="toggleSongTimes()">{{ toggleIndividualTimer }}</button>
   </div>
   <div class="translate">
     <app-translate></app-translate>
   </div>
-  <div class="finished setlist">
+  <div class="finished_setlist">
     <div class="title">
       <h2>{{setName}}</h2>
     </div>
-    <div class="songlist" *ngFor="let song of fullsonglist">
-      <ul>
-        <li>
-          <h3>{{song.name}}</h3>
-          <p>{{song.duration}}</p>
-        </li>
-      </ul>
+    <div class="songs">
+      <div class="songlist" *ngFor="let song of fullsonglist">
+        <h3>{{song.name}}</h3>
+        <p [ngClass]="{'hidesongtimer': !singleTimesShown}">{{song.duration}}</p>
+      </div>
     </div>
     <div class="time-available">
-      {{setTime}} mins
+      {{setTime}} {{ 'common.mins' | translate }}
     </div>
-    <span>A setlist created with GetSetPlay</span>
+    <span>{{ 'action.made_by' | translate }}</span>
   </div>
 </div>

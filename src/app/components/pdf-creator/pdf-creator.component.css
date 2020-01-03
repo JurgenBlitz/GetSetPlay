@@ -9,11 +9,27 @@
   right: 20px;
 }
 
-.finished-setlist {
+.finished_setlist {
   background: #eaeaea;
   color: #000;
   padding: 35px;
   margin-top: 20px;
   height: 600px;
   border-radius: 3px;
+}
+
+.songs {
+  display: grid;
+}
+.hidesongtimer {
+  display: none;
+}
+
+.songlist {
+  display: inline-flex;
+  align-items: center;
+}
+
+h3 {
+  margin-right: 30px;
 }
