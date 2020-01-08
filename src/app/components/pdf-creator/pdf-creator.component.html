@@ -1,6 +1,6 @@
 <div class="container">
   <div class="toolbar">
-    <button routerLink="/">{{'common.back' | translate }}</button>
+    <button (click)="goBack()">{{'common.back' | translate }}</button>
     <button (click)="toggleSongTimes()">{{ toggleIndividualTimer }}</button>
   </div>
   <div class="translate">

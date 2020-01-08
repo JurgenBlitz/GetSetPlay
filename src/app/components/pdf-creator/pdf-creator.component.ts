@@ -1,6 +1,7 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 // Service/s
 import { PassdataService } from '../../../services/passdata.service';
 
@@ -20,6 +21,7 @@ export class PdfCreatorComponent implements OnInit {
   showTimes: string = this.translate.instant('action.showtimes');
 
   constructor(
+    private router: Router,
     private passDataService: PassdataService,
     public translate: TranslateService
   ) {
@@ -33,6 +35,9 @@ export class PdfCreatorComponent implements OnInit {
     this.setTime = this.passDataService.finishedSetlist.time;
   }
 
+  /**
+   * Lets the user select whether to show each song's individual time or not
+   */
   toggleSongTimes() {
     // TODO: This is a botch- try to make this better
     if (this.toggleIndividualTimer === this.hideTimes) {
@@ -41,5 +46,9 @@ export class PdfCreatorComponent implements OnInit {
       this.toggleIndividualTimer = this.hideTimes;
     }
     this.singleTimesShown = !this.singleTimesShown;
+  }
+
+  goBack() {
+    this.router.navigate(['']);
   }
 }

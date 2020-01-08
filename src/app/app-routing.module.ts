@@ -6,8 +6,6 @@ import { PdfCreatorComponent } from './components/pdf-creator/pdf-creator.compon
 import { SetlistPdfComponent } from './components/setlist-pdf/setlist-pdf.component';
 
 const routes: Routes = [
-/*   { path: '', component: MainCompComponent},
-  { path: 'exportpdf', component: PdfCreatorComponent } */
   {path: '', redirectTo: 'home', pathMatch: 'full' },
   {path: 'home', component: MainCompComponent},
   {path: 'exportpdf', component: PdfCreatorComponent}

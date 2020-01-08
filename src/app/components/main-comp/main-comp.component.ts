@@ -97,8 +97,10 @@ export class MainCompComponent implements OnInit, OnChanges {
         this.initializeForm();
       });
     } else {
-      this.timeToPlayString = previousData.setName;
-      this.initialTime = previousData.time;
+      this.timeToPlayString = previousData.time;
+      this.initialTime = this.timeToPlayString;
+      this.setListName = previousData.setName;
+      this.songs = previousData.songs;
       this.starterTimeToMls(this.timeToPlayString);
       this.initializeForm();
     }
