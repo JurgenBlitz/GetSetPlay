@@ -2,12 +2,12 @@
   <div class="toolbar">
     <button (click)="goBack()">{{'common.back' | translate }}</button>
     <button (click)="toggleSongTimes()">{{ toggleIndividualTimer }}</button>
-    <button>{{ 'action.print' | translate }}</button>
+    <button (click)="captureScreen()">{{ 'action.print' | translate }}</button>
   </div>
   <div class="translate">
     <app-translate></app-translate>
   </div>
-  <div class="finished_setlist">
+  <div id="finished_setlist">
     <div class="title">
       <h2>{{setName}}</h2>
     </div>
