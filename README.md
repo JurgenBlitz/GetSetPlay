@@ -1,5 +1,7 @@
 # GetSetPlay
 
+### Country flag icons made by www.flaticon.com/authors/freepik
+
 **Idiomas/Languages**:
 1. [Español](#español)
 2. [English](#english)

@@ -7,7 +7,7 @@
     "not_now": "Not now",
     "save": "Save",
     "delete": "Delete",
-    "back": "Volver",
+    "back": "Go back",
     "finish": "Finish"
   },
   "action": {
@@ -17,6 +17,7 @@
     "no_thanks": "No thanks",
     "hidetimes": "Hide song times",
     "showtimes": "Show song times",
+    "print": "Export (PDF)",
     "made_by": "A setlist created with GetSetPlay"
   },
   "setlist_changename": {

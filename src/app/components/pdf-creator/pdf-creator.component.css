@@ -33,3 +33,18 @@
 h3 {
   margin-right: 30px;
 }
+
+button {
+  margin-top: 5px;
+  margin-right: 10px;
+  border: none;
+  border-bottom: 1px solid grey;
+  color: white;
+  background: transparent;
+}
+.time-available {
+  margin-bottom: 20px;
+}
+.made-by {
+  font-style: italic;
+}

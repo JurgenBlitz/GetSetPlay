@@ -2,6 +2,7 @@
   <div class="toolbar">
     <button (click)="goBack()">{{'common.back' | translate }}</button>
     <button (click)="toggleSongTimes()">{{ toggleIndividualTimer }}</button>
+    <button>{{ 'action.print' | translate }}</button>
   </div>
   <div class="translate">
     <app-translate></app-translate>
@@ -19,6 +20,6 @@
     <div class="time-available">
       {{setTime}} {{ 'common.mins' | translate }}
     </div>
-    <span>{{ 'action.made_by' | translate }}</span>
+    <span class="made-by">{{ 'action.made_by' | translate }}</span>
   </div>
 </div>
