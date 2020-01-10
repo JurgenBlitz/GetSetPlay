@@ -2,7 +2,7 @@
   <div class="toolbar">
     <button (click)="goBack()">{{'common.back' | translate }}</button>
     <button (click)="toggleSongTimes()">{{ toggleIndividualTimer }}</button>
-    <button>{{ 'action.print' | translate }}</button>
+    <button (click)="printSetlist()">{{ 'action.print' | translate }}</button>
   </div>
   <div class="translate">
     <app-translate></app-translate>

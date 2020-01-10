@@ -4,6 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 // Service/s
 import { PassdataService } from '../../../services/passdata.service';
+// PDFMake
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-pdf-creator',
@@ -46,6 +50,40 @@ export class PdfCreatorComponent implements OnInit {
       this.toggleIndividualTimer = this.hideTimes;
     }
     this.singleTimesShown = !this.singleTimesShown;
+  }
+
+  printSetlist() {
+    const mySet = this.fullsonglist;
+    function buildTableBody(data, columns) {
+      const body = [];
+      body.push(columns);
+      data.forEach(function(row) {
+        const dataRow = [];
+        columns.forEach(function(column) {
+          dataRow.push(row[column].toString());
+        });
+          body.push(dataRow);
+      });
+      return body;
+    }
+
+    function table(data, columns) {
+      return {
+          table: {
+              headerRows: 1,
+              body: buildTableBody(data, columns)
+          }
+      };
+    }
+
+    const formattedInfo = {
+      content: [
+          { text: this.setName, style: 'header' },
+          table(mySet, ['name', 'duration'])
+      ]
+    };
+
+    pdfMake.createPdf(formattedInfo).open();
   }
 
   goBack() {
