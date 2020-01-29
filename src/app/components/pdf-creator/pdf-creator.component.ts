@@ -57,33 +57,38 @@ export class PdfCreatorComponent implements OnInit {
     function buildTableBody(data, columns) {
       const body = [];
       body.push(columns);
-      data.forEach(function(row) {
+      data.forEach(function (row) {
         const dataRow = [];
-        columns.forEach(function(column) {
+        columns.forEach(function (column) {
           dataRow.push(row[column].toString());
         });
-          body.push(dataRow);
+        body.push(dataRow);
       });
       return body;
     }
 
     function table(data, columns) {
       return {
-          table: {
-              headerRows: 1,
-              body: buildTableBody(data, columns)
-          }
+        layout: 'noBorders',
+        table: {
+          headerRows: 0,
+          body: buildTableBody(data, columns)
+        }
       };
     }
 
     const formattedInfo = {
       content: [
-          { text: this.setName, style: 'header' },
-          table(mySet, ['name', 'duration'])
-      ]
+        { text: this.setName, style: 'header' },
+        table(mySet, ['name', 'duration'])
+      ], defaultStyle: {
+        fontSize: 20,
+        bold: true,
+        columnGap: 20
+      }
     };
 
-    pdfMake.createPdf(formattedInfo).open();
+    pdfMake.createPdf(formattedInfo).download();
   }
 
   goBack() {
